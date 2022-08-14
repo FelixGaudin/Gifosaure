@@ -1,15 +1,13 @@
 <template>
-    <div class="gifCard">
-        <a href="#" @click="copyToClipboard">
-          <div class="card">
-              <div class="card-image">
-                  <figure class="image is-4by3">
-                    <img v-if="!isCopied" :src="url" alt="Le gif est cassé">
-                    <img v-else src="@/assets/succes.png" alt="Succes">
-                  </figure>
-              </div>
-          </div>
-        </a>
+    <div class="gifCard" @click="copyToClipboard">
+        <div class="card">
+            <div class="card-image">
+                <figure class="image is-4by3">
+                  <img v-if="!isCopied" :src="url" alt="Le gif est cassé">
+                  <img v-else src="@/assets/succes.png" alt="Succes">
+                </figure>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -42,3 +40,7 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.gifCard { cursor: pointer; }
+</style>
