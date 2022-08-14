@@ -8,7 +8,7 @@
     </div>
 
     <div class="gifs">
-      <div class="gif" v-for="gif in gifs" :key="gif.url">
+      <div class="gif" v-for="gif in gifs.slice(0, 20)" :key="gif.url">
         <GifCard :url="gif.url"/>
       </div>
     </div>
