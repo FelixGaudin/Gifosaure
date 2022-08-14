@@ -17,27 +17,9 @@
 
 <script>
 import GifCard from './components/GifCard.vue'
-const gifs = [
-        {
-          url : "https://c.tenor.com/FsuzVwvsu2kAAAAd/tigger-tigger-winnie-the-pooh.gif",
-          tags : ["tigrou", "sad", "triste", "winnie"],
-        }, {
-          url : "https://c.tenor.com/0MhHbJND7CIAAAAC/mister-v-again.gif",
-          tags : ["mister v", "beaucoup", "encore"]
-        },
-        {
-          url : "https://c.tenor.com/Hu-O81bs6SIAAAAM/rene-ren%C3%A9malleville.gif",
-          tags : ["rene", "minute", "est", "honteux"]
-        },
-        {
-          url :"https://c.tenor.com/oP3VasmkrSQAAAAS/cest-bien-cest.gif",
-          tags : ["maillon", "faible", "content", "eleonore", "laurence", "boccolini"]
-        },
-        {
-          url : "https://y.yarn.co/45aa62aa-f2d7-4f7e-a820-353274daca35_text.gif",
-          tags : ["gina", "cancer", "not", "even", "cure"]
-        }
-      ]
+
+import baseGifs from '@/gifs.json'
+
 export default {
   name: 'App',
   components: {
@@ -46,7 +28,8 @@ export default {
   data() {
     return {
       query : "",
-      gifs : gifs
+      gifs : [],
+      baseGifs : baseGifs
     }
   },
   methods : {
@@ -62,17 +45,19 @@ export default {
     searchTags() {
       let tags = this.query.split(" ").filter((s) => s !== '');
       console.log(tags);
-      if (tags.length === 0) this.gifs = gifs
+      if (tags.length === 0) this.gifs = this.baseGifs;
       else {
         tags = tags.map(e => e.normalize("NFD").replace(/[\u0300-\u036f]/g, ""))
-        console.log(tags);
-        gifs.forEach(gif => gif.score = this.getScore(gif, tags))
-        console.log(gifs);
-        this.gifs = gifs
+        this.gifs = this.baseGifs.map(a => {return {...a}})
+        this.gifs.forEach(gif => gif.score = this.getScore(gif, tags))
+        this.gifs = this.gifs
           .filter(gif => gif.score !== 0)
           .sort((a, b) => {a.score < b.score})
       }
     }
+  },
+  beforeMount() {
+    this.gifs = this.baseGifs;
   }
 }
 </script>
