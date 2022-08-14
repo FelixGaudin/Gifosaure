@@ -1,9 +1,16 @@
 <template>
   <div id="app">
-    <h1 class="title">Gifosaure</h1>
+    <!-- <h1 class="title">Gifosaure</h1> -->
+    <img src="@/assets/title.png" alt="Gifosaure" class="title">
     <div class="centered">
-      <b-field label="Chercher" class="centered">
-          <b-input v-model="query" @input="searchTags"></b-input>
+      <b-field label="" class="centered">
+          <b-input 
+            placeholder="Chercher"
+            v-model="query" 
+            @input="searchTags"
+            icon-right="close-circle"
+            icon-right-clickable
+            @icon-right-click="clearIconClick"></b-input>
       </b-field>
     </div>
 
@@ -33,6 +40,10 @@ export default {
     }
   },
   methods : {
+    clearIconClick() {
+      this.query = "",
+      this.searchTags();
+    },
     getScore(gif, tags) {
       let matches = 0;
       tags.forEach(searchTag => {
@@ -80,6 +91,7 @@ body{
 }
 .title {
   font-size: 2em;
+  width: 40vw;
 }
 .centered {
     margin: auto;
