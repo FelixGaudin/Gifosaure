@@ -16,7 +16,10 @@
 
     <div class="gifs">
       <div class="gif" v-for="gif in gifs.slice(0, 20)" :key="gif.url">
-        <GifCard :url="gif.url"/>
+        <GifCard 
+          :url="gif.url"
+          :description="gif.tags.join(' ')"
+          />
       </div>
     </div>
   </div>
@@ -114,4 +117,6 @@ body{
     /* min-width: 100px; */
     /* max-height: 25vw; */
 }
+/* https://stackoverflow.com/questions/5770082/newline-in-alt-text */
+img{white-space:pre}
 </style>

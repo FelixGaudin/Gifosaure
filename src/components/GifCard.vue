@@ -3,7 +3,7 @@
         <div class="card">
             <div class="card-image">
                 <figure class="image is-4by3">
-                  <img v-if="!isCopied" :src="url" alt="Le gif est cassé">
+                  <img v-if="!isCopied" :src="url" :alt="description">
                   <img v-else src="@/assets/succes.png" alt="Succes">
                 </figure>
             </div>
@@ -20,7 +20,8 @@ export default {
     }
   },
   props: {
-    url: String
+    url: String,
+    description : String
   },
   methods : {
     copyToClipboard() {
